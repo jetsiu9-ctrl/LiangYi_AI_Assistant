@@ -4,7 +4,7 @@ Photoshop UXP MVP for the image APIs.
 
 ## Features
 
-- Default Base URL: `https://ai.t8star.org`
+- Customizable Base URL and API key
 - User-editable Base URL saved in the UXP plugin data folder
 - API key saved in the UXP plugin data folder
 - Text-to-image request via `/v1/images/generations`
