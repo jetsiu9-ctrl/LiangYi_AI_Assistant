@@ -1,6 +1,6 @@
-# Zhenzhen AI UXP
+# Liang Yi_Al_Assistant
 
-Photoshop UXP MVP for the T8mars/Zhenzhen OpenAI-compatible image APIs.
+Photoshop UXP MVP for the image APIs.
 
 ## Features
 
