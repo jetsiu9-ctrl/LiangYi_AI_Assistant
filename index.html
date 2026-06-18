@@ -17,10 +17,6 @@
       </aside>
 
       <section class="module-content">
-        <header class="panel-header">
-          <sp-heading size="M">凉意AI助手</sp-heading>
-        </header>
-
         <section id="connectionModule" class="module-panel is-active">
           <sp-heading size="S">连接设置</sp-heading>
 
@@ -33,6 +29,7 @@
               <sp-label>+</sp-label>
             </sp-action-button>
           </section>
+          <p class="info-text interface-help-text">点击"+"添加接口，右键下拉框可编辑</p>
 
           <section id="interfaceActionMenu" class="interface-action-menu is-hidden">
             <sp-button id="editInterfaceButton" variant="secondary">
@@ -57,7 +54,7 @@
             <sp-textfield id="interfaceApiKeyInput" type="password"></sp-textfield>
 
             <section class="button-row">
-              <sp-button id="saveInterfaceButton" variant="primary">
+              <sp-button id="saveInterfaceButton" variant="secondary">
                 <sp-label>保存</sp-label>
               </sp-button>
               <sp-button id="cancelInterfaceButton" variant="secondary">
@@ -217,10 +214,8 @@
             <sp-label for="asyncCheckbox">异步任务</sp-label>
           </section>
 
-          <section class="button-row">
-            <sp-button id="generateButton" variant="primary">
-              <sp-label>开始生成</sp-label>
-            </sp-button>
+          <section class="button-row generate-action-row">
+            <sp-button id="generateButton" variant="accent">开始生成</sp-button>
           </section>
 
           <section class="status-block">

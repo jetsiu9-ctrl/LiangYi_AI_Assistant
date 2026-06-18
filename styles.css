@@ -127,26 +127,6 @@ body {
   overflow-y: auto;
 }
 
-.panel-header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-xs);
-  max-width: var(--panel-max-width);
-  min-width: 0;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.panel-header sp-heading {
-  margin: 0 0 2px;
-  padding: 0 0 7px;
-  color: #fff;
-  border-bottom: 1px solid var(--border-soft);
-  font-family: var(--font-ui);
-  font-size: 14px;
-  font-weight: 700;
-}
-
 .module-panel {
   display: none;
   flex-direction: column;
@@ -164,6 +144,7 @@ body {
 .module-panel > sp-heading,
 .module-panel > sp-label,
 .module-panel > sp-textarea,
+.module-panel > .info-text,
 .module-panel > .field-row,
 .module-panel > .check-row,
 .module-panel > .button-row,
@@ -208,6 +189,18 @@ body {
   gap: var(--gap);
   align-items: center;
   margin-top: 2px;
+}
+
+.check-row + .generate-action-row {
+  margin-top: 8px;
+}
+
+.generate-action-row {
+  margin-bottom: 6px;
+}
+
+.generate-action-row + .status-block {
+  margin-top: 4px;
 }
 
 .interface-picker-row {
@@ -629,6 +622,18 @@ sp-body {
   font-family: var(--font-ui);
 }
 
+.info-text {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.interface-help-text {
+  margin-top: 4px;
+}
+
 sp-textfield,
 sp-textarea,
 sp-picker {
@@ -643,7 +648,8 @@ sp-picker {
 #editInterfaceButton,
 #deleteInterfaceButton,
 #cancelInterfaceActionButton,
-#generateButton,
+#saveInterfaceButton,
+#cancelInterfaceButton,
 #clearReferencesButton,
 #deleteCurrentResultButton,
 #clearResultsButton {
@@ -651,12 +657,14 @@ sp-picker {
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease, opacity 0.16s ease;
 }
 
 #editInterfaceButton::part(button),
 #deleteInterfaceButton::part(button),
 #cancelInterfaceActionButton::part(button),
-#generateButton::part(button),
+#saveInterfaceButton::part(button),
+#cancelInterfaceButton::part(button),
 #clearReferencesButton::part(button),
 #deleteCurrentResultButton::part(button),
 #clearResultsButton::part(button) {
@@ -664,12 +672,14 @@ sp-picker {
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease, opacity 0.16s ease;
 }
 
 #editInterfaceButton sp-label,
 #deleteInterfaceButton sp-label,
 #cancelInterfaceActionButton sp-label,
-#generateButton sp-label,
+#saveInterfaceButton sp-label,
+#cancelInterfaceButton sp-label,
 #clearReferencesButton sp-label,
 #deleteCurrentResultButton sp-label,
 #clearResultsButton sp-label {
@@ -680,29 +690,143 @@ sp-picker {
   text-align: center;
 }
 
-#generateButton,
 #exportCurrentButton,
 #exportAllButton {
   background: var(--accent);
   border-color: var(--accent);
 }
 
+#generateButton:not([disabled]),
+#editInterfaceButton:not([disabled]),
+#deleteInterfaceButton:not([disabled]),
+#cancelInterfaceActionButton:not([disabled]),
+#saveInterfaceButton:not([disabled]),
+#cancelInterfaceButton:not([disabled]),
+#clearReferencesButton:not([disabled]),
+#clearResultsButton:not([disabled]) {
+  cursor: pointer;
+}
+
+#generateButton:not([disabled])::part(button),
+#editInterfaceButton:not([disabled])::part(button),
+#deleteInterfaceButton:not([disabled])::part(button),
+#cancelInterfaceActionButton:not([disabled])::part(button),
+#saveInterfaceButton:not([disabled])::part(button),
+#cancelInterfaceButton:not([disabled])::part(button),
+#clearReferencesButton:not([disabled])::part(button),
+#clearResultsButton:not([disabled])::part(button) {
+  cursor: pointer;
+}
+
+#editInterfaceButton,
+#deleteInterfaceButton,
+#cancelInterfaceActionButton,
+#saveInterfaceButton,
+#cancelInterfaceButton {
+  min-height: 30px;
+  padding: 6px 12px;
+  color: #fff !important;
+  background: var(--surface-strong) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  user-select: none;
+}
+
+#editInterfaceButton::part(button),
+#deleteInterfaceButton::part(button),
+#cancelInterfaceActionButton::part(button),
+#saveInterfaceButton::part(button),
+#cancelInterfaceButton::part(button) {
+  min-height: 30px;
+  padding: 6px 12px;
+  background: var(--surface-strong) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius);
+  color: #fff !important;
+}
+
+#editInterfaceButton:hover:not([disabled]),
+#deleteInterfaceButton:hover:not([disabled]),
+#cancelInterfaceActionButton:hover:not([disabled]),
+#saveInterfaceButton:hover:not([disabled]),
+#cancelInterfaceButton:hover:not([disabled]) {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+}
+
+#editInterfaceButton:hover:not([disabled])::part(button),
+#deleteInterfaceButton:hover:not([disabled])::part(button),
+#cancelInterfaceActionButton:hover:not([disabled])::part(button),
+#saveInterfaceButton:hover:not([disabled])::part(button),
+#cancelInterfaceButton:hover:not([disabled])::part(button) {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+}
+
+#editInterfaceButton:active:not([disabled]),
+#deleteInterfaceButton:active:not([disabled]),
+#cancelInterfaceActionButton:active:not([disabled]),
+#saveInterfaceButton:active:not([disabled]),
+#cancelInterfaceButton:active:not([disabled]) {
+  background: rgba(61, 125, 231, 0.74) !important;
+  border-color: var(--accent) !important;
+}
+
+#editInterfaceButton:active:not([disabled])::part(button),
+#deleteInterfaceButton:active:not([disabled])::part(button),
+#cancelInterfaceActionButton:active:not([disabled])::part(button),
+#saveInterfaceButton:active:not([disabled])::part(button),
+#cancelInterfaceButton:active:not([disabled])::part(button) {
+  background: rgba(61, 125, 231, 0.74) !important;
+  border-color: var(--accent) !important;
+}
+
 #clearReferencesButton {
   background: var(--surface-strong);
   border-color: var(--border);
+  color: #fff;
 }
 
 #deleteCurrentResultButton,
 #clearResultsButton {
   background: var(--surface-strong);
   border-color: var(--border);
+  color: #fff;
 }
 
-#clearReferencesButton:hover,
-#deleteCurrentResultButton:hover,
-#clearResultsButton:hover {
+#deleteCurrentResultButton:hover:not([disabled]) {
   background: var(--surface-hover);
   border-color: rgba(61, 125, 231, 0.42);
+}
+
+#clearReferencesButton:hover:not([disabled]),
+#clearReferencesButton:focus:not([disabled]),
+#clearResultsButton:hover:not([disabled]),
+#clearResultsButton:focus:not([disabled]) {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+  opacity: 0.96;
+}
+
+#clearReferencesButton:active:not([disabled]),
+#clearResultsButton:active:not([disabled]) {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+  opacity: 0.82;
+}
+
+#generateButton[disabled],
+#clearReferencesButton[disabled],
+#clearResultsButton[disabled] {
+  cursor: default;
 }
 
 .reference-remove:hover {
