@@ -1,0 +1,711 @@
+:root {
+  --panel-padding: 10px;
+  --sidebar-width: 58px;
+  --panel-min-width: 400px;
+  --panel-max-width: 402px;
+  --module-breathing-space: 5px;
+  --gap-xs: 4px;
+  --gap-sm: 5px;
+  --gap: 7px;
+  --gap-lg: 10px;
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-lg: 8px;
+  --accent: #3d7de7;
+  --danger: #ce3e3e;
+  --bg: var(--uxp-host-background-color, #242424);
+  --surface: rgba(255, 255, 255, 0.038);
+  --surface-strong: rgba(255, 255, 255, 0.065);
+  --surface-hover: rgba(61, 125, 231, 0.12);
+  --border: rgba(255, 255, 255, 0.18);
+  --border-soft: rgba(255, 255, 255, 0.10);
+  --text: var(--uxp-host-text-color, #f2f2f2);
+  --text-muted: rgba(255, 255, 255, 0.68);
+  --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.22);
+  --font-ui: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: var(--text);
+  background: var(--bg);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 1.45;
+  overflow: hidden;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  min-width: var(--panel-min-width);
+  overflow: hidden;
+}
+
+.module-sidebar {
+  display: flex;
+  flex: 0 0 var(--sidebar-width);
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: var(--sidebar-width);
+  padding: 8px 7px;
+  background: rgba(0, 0, 0, 0.08);
+  border-right: 1px solid var(--border-soft);
+}
+
+.module-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  min-height: 36px;
+  margin: 2px 0;
+  padding: 0;
+  color: var(--text-muted);
+  background: transparent;
+  border: 0;
+  outline: none;
+  box-shadow: none;
+  border-radius: var(--radius);
+}
+
+.module-nav[quiet],
+.module-nav:hover,
+.module-nav:focus,
+.module-nav:focus-visible,
+.module-nav.is-active {
+  border: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+.module-nav sp-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  line-height: 1;
+  text-align: center;
+}
+
+.module-nav:hover {
+  color: #fff;
+  background: var(--surface-hover);
+}
+
+.module-nav.is-active {
+  color: #fff;
+  background: var(--accent);
+  box-shadow: none;
+}
+
+.module-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--gap-lg);
+  min-width: 0;
+  height: 100vh;
+  padding: var(--panel-padding) 12px 12px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.panel-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  max-width: var(--panel-max-width);
+  min-width: 0;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.panel-header sp-heading {
+  margin: 0 0 2px;
+  padding: 0 0 7px;
+  color: #fff;
+  border-bottom: 1px solid var(--border-soft);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.module-panel {
+  display: none;
+  flex-direction: column;
+  gap: calc(var(--gap) + var(--module-breathing-space));
+  max-width: var(--panel-max-width);
+  min-width: 0;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.module-panel.is-active {
+  display: flex;
+}
+
+.module-panel > sp-heading,
+.module-panel > sp-label,
+.module-panel > sp-textarea,
+.module-panel > .field-row,
+.module-panel > .check-row,
+.module-panel > .button-row,
+.result-preview-section,
+.reference-section,
+.status-block {
+  flex: 0 0 auto;
+}
+
+.module-panel > sp-heading,
+.result-preview-section > sp-heading,
+.status-block > sp-heading {
+  margin: 0 0 3px;
+  padding: 0 0 7px;
+  color: #fff;
+  border-bottom: 1px solid var(--border-soft);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.field-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  width: 100%;
+}
+
+.field {
+  display: flex;
+  flex: 1 1 150px;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  min-width: 130px;
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  align-items: center;
+  margin-top: 2px;
+}
+
+.interface-picker-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap);
+  align-items: center;
+  width: 100%;
+}
+
+.interface-picker-row sp-picker {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.interface-add-button {
+  display: flex;
+  flex: 0 0 34px;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  min-height: 34px;
+  padding: 0;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.interface-add-button sp-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.interface-action-menu {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  align-items: center;
+  padding: 7px;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+}
+
+.interface-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  padding: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+}
+
+.check-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap);
+  align-items: center;
+  padding: 8px;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: var(--radius-lg);
+}
+
+.result-preview-section,
+.reference-section,
+.status-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  padding: 8px;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: var(--radius-lg);
+}
+
+.result-preview-shell {
+  position: relative;
+  display: flex;
+  flex: 0 0 260px;
+  flex-direction: column;
+  width: 100%;
+  height: 260px;
+  min-height: 260px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+}
+
+.result-preview-image {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  background: var(--surface-strong);
+}
+
+.result-controls {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--gap);
+  padding: 8px;
+  opacity: 0;
+  pointer-events: none;
+  background: transparent;
+}
+
+.result-preview-shell:hover .result-controls,
+.result-preview-shell:focus-within .result-controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.result-count-badge {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  padding: 2px 7px;
+  background: rgba(0, 0, 0, 0.52);
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+}
+
+.result-count-badge sp-body {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.result-pager {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 64%;
+  min-width: 150px;
+  max-width: 260px;
+  height: 100%;
+  padding: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.result-nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  width: 34px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  color: #fff;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+  pointer-events: auto;
+  --mod-actionbutton-background-color-default: transparent;
+  --mod-actionbutton-background-color-hover: transparent;
+  --mod-actionbutton-background-color-down: transparent;
+  --mod-actionbutton-background-color-focus: transparent;
+  --mod-actionbutton-background-color-key-focus: transparent;
+  --mod-actionbutton-border-color-default: transparent;
+  --mod-actionbutton-border-color-hover: transparent;
+  --mod-actionbutton-border-color-down: transparent;
+  --mod-actionbutton-border-color-focus: transparent;
+  --mod-actionbutton-border-color-key-focus: transparent;
+  --spectrum-actionbutton-background-color-default: transparent;
+  --spectrum-actionbutton-background-color-hover: transparent;
+  --spectrum-actionbutton-background-color-down: transparent;
+  --spectrum-actionbutton-border-color-default: transparent;
+  --spectrum-actionbutton-border-color-hover: transparent;
+  --spectrum-actionbutton-border-color-down: transparent;
+}
+
+.result-nav-button:hover,
+.result-nav-button:active,
+.result-nav-button:focus,
+.result-nav-button:focus-visible {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+.result-nav-button[quiet],
+.result-nav-button[quiet]:hover,
+.result-nav-button[quiet]:active,
+.result-nav-button[quiet]:focus,
+.result-nav-button[quiet]:focus-visible {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+.result-nav-button::part(button) {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+.result-nav-button sp-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  line-height: 1;
+}
+
+#prevResultButton,
+#nextResultButton {
+  transform: translateY(100px);
+}
+
+#nextResultButton {
+  transform: translate(115px, 100px);
+}
+
+.result-export-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap);
+  width: 100%;
+}
+
+.result-manage-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap);
+  width: 100%;
+}
+
+.reference-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--gap);
+  align-items: center;
+}
+
+.reference-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 0;
+  min-height: 0;
+  max-height: 292px;
+  padding: 4px;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid var(--border-soft);
+}
+
+.reference-cell {
+  display: flex;
+  flex: 1 1 50%;
+  flex-direction: column;
+  min-width: 120px;
+  height: 90px;
+  padding: 3px;
+}
+
+.reference-cell-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+}
+
+.reference-thumb {
+  max-width: 100%;
+  max-height: 58px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.reference-index {
+  font-size: 10px;
+}
+
+.reference-remove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  color: #e03448;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  --mod-actionbutton-background-color-default: transparent;
+  --mod-actionbutton-background-color-hover: transparent;
+  --mod-actionbutton-background-color-down: transparent;
+  --mod-actionbutton-border-color-default: transparent;
+  --mod-actionbutton-border-color-hover: transparent;
+  --mod-actionbutton-border-color-down: transparent;
+}
+
+.reference-remove::part(button) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  min-height: 24px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+.reference-add-cell {
+  cursor: pointer;
+}
+
+.reference-add-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px dashed rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-sm);
+}
+
+.reference-add-tile:hover {
+  background: rgba(61, 125, 231, 0.10);
+  border-color: rgba(106, 159, 217, 0.85);
+}
+
+.reference-add-icon {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.reference-add-text {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 10px;
+}
+
+.is-hidden {
+  display: none;
+}
+
+sp-label {
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+sp-body {
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+}
+
+sp-textfield,
+sp-textarea,
+sp-picker {
+  width: 100%;
+  font-family: var(--font-ui);
+}
+
+.button-row sp-button {
+  min-width: 96px;
+}
+
+#editInterfaceButton,
+#deleteInterfaceButton,
+#cancelInterfaceActionButton,
+#generateButton,
+#clearReferencesButton,
+#deleteCurrentResultButton,
+#clearResultsButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#editInterfaceButton::part(button),
+#deleteInterfaceButton::part(button),
+#cancelInterfaceActionButton::part(button),
+#generateButton::part(button),
+#clearReferencesButton::part(button),
+#deleteCurrentResultButton::part(button),
+#clearResultsButton::part(button) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#editInterfaceButton sp-label,
+#deleteInterfaceButton sp-label,
+#cancelInterfaceActionButton sp-label,
+#generateButton sp-label,
+#clearReferencesButton sp-label,
+#deleteCurrentResultButton sp-label,
+#clearResultsButton sp-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+#generateButton,
+#exportCurrentButton,
+#exportAllButton {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+#clearReferencesButton {
+  background: var(--surface-strong);
+  border-color: var(--border);
+}
+
+#deleteCurrentResultButton,
+#clearResultsButton {
+  background: var(--surface-strong);
+  border-color: var(--border);
+}
+
+#clearReferencesButton:hover,
+#deleteCurrentResultButton:hover,
+#clearResultsButton:hover {
+  background: var(--surface-hover);
+  border-color: rgba(61, 125, 231, 0.42);
+}
+
+.reference-remove:hover {
+  color: #c02038;
+  background: transparent;
+}
